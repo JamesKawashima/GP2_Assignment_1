@@ -40,13 +40,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player == null || scoreText == null || jumpText == null)
+        if (scoreText == null)
         {
             scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
-            jumpText = GameObject.FindGameObjectWithTag("Double").GetComponent<Text>();
-            player = GameObject.FindGameObjectWithTag("Player");
             updateCanvas();
 
+        }
+        if (SceneManager.GetActiveScene().buildIndex != 4)
+        {
+            jumpText = GameObject.FindGameObjectWithTag("Double").GetComponent<Text>();
+            player = GameObject.FindGameObjectWithTag("Player");
         }
     }
 

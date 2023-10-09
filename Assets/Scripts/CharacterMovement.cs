@@ -40,7 +40,7 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         ProcessRotation();
-        ProcessGravity();
+        //ProcessGravity();
         ProcessMovement();
 
 
@@ -133,21 +133,21 @@ public class CharacterMovement : MonoBehaviour
 
         move = camera.transform.right * Horizontal + camera.transform.forward * Vertical + playerVelocity * Time.deltaTime;
 
-        controller.Move(move);
+        controller.Move(move + ProcessGravity());
 
     }
 
 
-    public void ProcessGravity()
+    public Vector3 ProcessGravity()
     {
         bool isGrounded = controller.isGrounded;
-
+        Debug.Log(isGrounded);
         if (isGrounded)
         {
             canDoubleJump = false;
             if (playerVelocity.y < 0.0f)
             {
-                playerVelocity.y = -1.0f;
+                playerVelocity.y = -0.0f;
             }
             if (Input.GetButtonDown("Jump")) // Code to jump
             {
@@ -175,7 +175,7 @@ public class CharacterMovement : MonoBehaviour
             playerVelocity.y += gravity * Time.deltaTime;
         }
 
-        controller.Move(move * Time.deltaTime * GetMovementSpeed() + playerVelocity * Time.deltaTime);
+        return playerVelocity * Time.deltaTime;
     }
 
 

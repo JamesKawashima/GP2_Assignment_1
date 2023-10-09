@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    private GameManager gameManager;
+
     private void Start()
     {
-        gameManager = GameManager.Instance;
     }
     public void OnGameStart()
     {
@@ -22,7 +21,6 @@ public class MenuManager : MonoBehaviour
 
     public void OnGameRestart()
     {
-        gameManager.ResetLvl();
         SceneManager.LoadScene(1);
     }
 }
